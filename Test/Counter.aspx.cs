@@ -6,19 +6,29 @@ namespace Test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var x = 100;
+
             if (!IsPostBack)
             {
-                //ViewState["count"] = 0;
-                CounterOp.Text = "0";
+                ViewState["count"] = Convert.ToString(x); //100
+                ViewState["SecondCount"] = Convert.ToString(x); //100
+                Label1.Text = Convert.ToString(x);
+                Label2.Text = Convert.ToString(x);
             }
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            var count = Convert.ToInt32(CounterOp.Text);
+            var count = Convert.ToInt32(ViewState["count"]);
             count++;
-            CounterOp.Text = Convert.ToString(count);
+
+            var seconCount = Convert.ToInt32(ViewState["SecondCount"]);
+            seconCount--;
+            ViewState["count"] = count;
+            ViewState["SecondCount"] = seconCount;
+            Label1.Text = Convert.ToString(count);
+            Label2.Text = Convert.ToString(seconCount);
         }
     }
 }
